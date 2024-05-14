@@ -1,6 +1,6 @@
 ALX Portfolio project
 
-# priceTracker
+# PricePal
 
 This Project is for ALX Portfolio project
 Price Tracker, let you track prices from e-commerse website like Amazon.

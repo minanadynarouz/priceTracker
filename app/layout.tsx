@@ -10,7 +10,7 @@ const spaceGrotesk = Space_Grotesk({
 
 
 export const metadata: Metadata = {
-  title: "PriceTracker",
+  title: "PricePal",
   description: "Track product prices and compare between e-commerse websites",
 };
 
@@ -19,7 +19,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className} >
         <main className={"max-w-10x1 mx-auto"}>
           <Navbar />
           {children}
@@ -28,3 +28,4 @@ export default function RootLayout({
     </html>
   );
 }
+

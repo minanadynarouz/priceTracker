@@ -3,15 +3,31 @@
 import HeroCarousel from '@/components/HeroCarousel'
 import Searchbar from '@/components/Searchbar'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getAllProducts } from '@/lib/actions'
 
 const Home = () => {
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const products = await getAllProducts();
+        setAllProducts(products);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <section className="px-6 md:px20 py-24 ">
         <div className="flex max-xl:flex-col gap-16">
           <div className="flex flex-col justify-center">
-            <p className="small-text">
+            <p className="text-sky-700 text-sm" style={{ display: 'inline-flex' }}>
               Smart Shopping starts here:
               <Image
                 src="/assets/icons/arrow-right.svg"
@@ -22,7 +38,7 @@ const Home = () => {
             </p>
             <h1 className="head-text">
               Unleash the Power of
-              <span className="text-primary"> PriceTracker</span>
+              <span className="text-sky-700"> PricePal</span>
             </h1>
 
             <p className="mt-6">
@@ -34,14 +50,14 @@ const Home = () => {
 
           <HeroCarousel />
         </div>
-      </section>
+      </section >
 
-      <section className="trending-section">
+      <section className="trending-section ">
         <h2 className="section-text">Trending</h2>
 
         <div className="flex flex-wrap gap-x-8 gap-y-16">
-          {['Apple Iphone 15', 'Book', 'Sneakers'].map((product) => (
-            <div>{product}</div>
+          {allProducts?.map((product) => (
+            <div key={product.id}>{product.title}</div>
           ))}
         </div>
       </section>

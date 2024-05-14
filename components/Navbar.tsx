@@ -22,7 +22,7 @@ const Navbar = () => {
                         height={27}
                     />
                     <p className="nav-logo">
-                        Price<span className="text-primary">Tracker</span>
+                        Price<span className="text-sky-700">Pal</span>
                     </p>
                 </Link>
 
