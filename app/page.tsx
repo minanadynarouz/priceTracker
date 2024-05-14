@@ -6,21 +6,9 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { getAllProducts } from '@/lib/actions'
 
-const Home = () => {
-  const [allProducts, setAllProducts] = useState([]);
+const Home = async () => {
+  const allProducts = await getAllProducts();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const products = await getAllProducts();
-        setAllProducts(products);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <>
@@ -57,7 +45,7 @@ const Home = () => {
 
         <div className="flex flex-wrap gap-x-8 gap-y-16">
           {allProducts?.map((product) => (
-            <div key={product.id}>{product.title}</div>
+            <div>{product.title}</div>
           ))}
         </div>
       </section>
