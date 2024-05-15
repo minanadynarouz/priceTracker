@@ -7,32 +7,30 @@ import { getAveragePrice, getHighestPrice, getLowestPrice } from "./utils";
 import { revalidatePath } from "next/cache";
 
 
+// Scrap the product, create it in Database or update it if already existing
 
 export async function scrapeAndStoreProduct(productUrl: string) {
     if (!productUrl) return;
 
     try {
         connectToDB();
-        const scrappedProduct = await scrapeAmazonProduct(productUrl);
 
-        if (!scrappedProduct) return;
+        const scrapedProduct = await scrapeAmazonProduct(productUrl);
 
-        //Find product in DB or create product in DB
-        // Already created the DB connection in mongoose.ts file
-        // We created a DB model/schema in models dir under lib in order to continue below
+        if (!scrapedProduct) return;
 
-        let product = scrappedProduct;
+        let product = scrapedProduct;
 
-        // Use findone method to find the product based on the URL 
-        const existingProduct = await Product.findOne({ url: scrappedProduct.url });
+        const existingProduct = await Product.findOne({ url: scrapedProduct.url });
+
         if (existingProduct) {
             const updatedPriceHistory: any = [
                 ...existingProduct.priceHistory,
-                { price: scrappedProduct.currentPrice }
+                { price: scrapedProduct.currentPrice }
             ]
 
             product = {
-                ...scrappedProduct,
+                ...scrapedProduct,
                 priceHistory: updatedPriceHistory,
                 lowestPrice: getLowestPrice(updatedPriceHistory),
                 highestPrice: getHighestPrice(updatedPriceHistory),
@@ -41,21 +39,24 @@ export async function scrapeAndStoreProduct(productUrl: string) {
         }
 
         const newProduct = await Product.findOneAndUpdate(
-            { url: scrappedProduct.url },
+            { url: scrapedProduct.url },
             product,
             { upsert: true, new: true }
-        )
+        );
 
         revalidatePath(`/products/${newProduct._id}`);
-
     } catch (error: any) {
         throw new Error(`Failed to create/update product: ${error.message}`)
     }
 }
 
+// Retreive product from DB by ID
+
 export async function getProductById(productId: string) {
     try {
         connectToDB();
+
+        // _id is automatically created by mongoDB
         const product = await Product.findOne({ _id: productId });
 
         if (!product) return null;
@@ -66,13 +67,16 @@ export async function getProductById(productId: string) {
     }
 }
 
+// Retreive all products from DB
+
 export async function getAllProducts() {
     try {
         connectToDB();
-        const products = Product.find();
+
+        const products = await Product.find();
+
         return products;
     } catch (error) {
         console.log(error);
-        return;
     }
 }

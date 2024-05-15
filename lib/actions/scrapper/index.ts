@@ -1,7 +1,10 @@
+"use server"
+
 import axios from "axios";
 import * as cheerio from "cheerio"
 import { extractCurrency, extractDescription, extractPrice } from "../utils";
 
+// Function auth using brightdata, then scrap using axios, store the scrapped data into variables
 export async function scrapeAmazonProduct(url: string) {
     if (!url) return;
 
@@ -52,7 +55,11 @@ export async function scrapeAmazonProduct(url: string) {
         const currency = extractCurrency($('.a-price-symbol'));
         const discountRate = $('.savingsPercentage').text().replace(/[-%]/g, "")
         const stars = $('.a-size-base .a-color-base').text().trim();
-        // const reviewsCount = $('#acrCustomerReviewText').text().trim();
+
+        const reviewsValue = $('#acrCustomerReviewText').text().trim();
+        const matchResult = reviewsValue.match(/\d+/);
+        const reviewsCount = matchResult ? parseInt(matchResult[0]) : 0;
+
         const reviewsLink = $('a#acrCustomerReviewLink').attr('href');
         const description = extractDescription($)
 
@@ -69,7 +76,7 @@ export async function scrapeAmazonProduct(url: string) {
             isOutOfStock: outOfStock,
             description,
             stars: stars || "No rating",
-            // reviewsCount: reviewsCount,
+            reviewsCount: reviewsCount,
             reviewsLink: reviewsLink || "No reviews",
             lowestPrice: Number(currentPrice) || Number(originalPrice),
             highestPrice: Number(originalPrice) || Number(currentPrice),

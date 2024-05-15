@@ -32,9 +32,19 @@ export function extractPrice(...elements: any) {
 
 // Extracts and returns the currency symbol from an element.
 export function extractCurrency(element: any) {
-    const currencyText = element.text().trim().slice(0, 1);
-    return currencyText ? currencyText : "";
+    let currencyText = element.text().trim();
+
+    const pattern = /[A-Z]{3}/;
+
+    // Extract the currency code if it starts with "EGP"
+    if (currencyText.includes(currencyText.match(pattern))) {
+        return currencyText.slice(0, 3) + " ";
+    }
+
+    // If not "EGP", extract the first character as the currency code
+    return currencyText.charAt(0) + " ";
 }
+
 
 // Extracts description from two possible elements from amazon
 export function extractDescription($: any) {
