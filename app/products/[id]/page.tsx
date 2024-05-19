@@ -6,7 +6,7 @@ import { formatNumber } from "@/lib/actions/utils";
 import { Product } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import { redirect } from "next/navigation";
 
 type Props = {
     params: { id: string }
@@ -18,14 +18,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
     const product: Product = await getProductById(id);
 
     // Using nextjs redirect incase product not found
-    // if (!product) { redirect('/') }
-
-    const router = useRouter();
-
-    if (!product) {
-        router.push('/');
-        return null; // Optional: return null to prevent further rendering
-    }
+    if (!product) { redirect('/') }
 
     const similarProducts = await getSimilarProducts(id);
 
