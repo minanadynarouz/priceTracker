@@ -13,6 +13,7 @@ module.exports = {
           "orange": "#D48D3B",
           "green": "#3E9242"
         },
+        customBlue: "#0369A1",
         secondary: "#282828",
         "gray-200": "#EAECF0",
         "gray-300": "D0D5DD",
