@@ -30,7 +30,7 @@ const Home = async () => {
             </h1>
 
             <p className="mt-6">
-              Powerful, self-serve product and growth analytics to help you convert, engage, and retain more.
+              Robust, self-service product and growth analytics to help you convert, engage, and retain more.
             </p>
 
             <Searchbar />
@@ -41,7 +41,7 @@ const Home = async () => {
       </section >
 
       <section className="trending-section ">
-        <h2 className="section-text">Trending</h2>
+        <h2 className="section-text">Products you followed</h2>
 
         <div className="flex flex-wrap gap-x-8 gap-y-16">
           {allProducts?.map((product) => (

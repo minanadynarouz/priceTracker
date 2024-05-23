@@ -7,6 +7,22 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
+      },
+      gradientColorStops: {
+        'primary': '#4a90e2',
+        'secondary': '#d1e8ff',
+      },
+      keyframes: {
+        stretch: {
+          '0%': { width: '0', left: '50%' },
+          '100%': { width: '100%', left: '0%' },
+        },
+      },
+      animation: {
+        stretch: 'stretch 1s ease-out forwards',
+      },
       colors: {
         primary: {
           DEFAULT: "#E43030",
@@ -35,6 +51,7 @@ module.exports = {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
         spaceGrotesk: ['Space Grotesk', 'sans-serif'],
+        jetBrainsMono: ['JetBrains Mono', 'monospace']
       },
       borderRadius: {
         10: "10px"

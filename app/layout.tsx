@@ -19,8 +19,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/assets/icons/logo.svg" />
+      </head>
       <body className={inter.className} >
-        <main className={"max-w-10x1 mx-auto"}>
+        <main className="max-w-10x1 mx-auto">
           <Navbar />
           {children}
         </main>

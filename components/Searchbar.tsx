@@ -47,7 +47,7 @@ const Searchbar = () => {
     }
 
     return (
-        <form className='flex flex-wrap gap-4 mt-12'
+        <form className=' flex flex-wrap gap-4 mt-12'
             onSubmit={handleSubmit}
         >
             <input

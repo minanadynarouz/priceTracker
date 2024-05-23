@@ -9,6 +9,7 @@
   scroll-behavior: smooth;
 }
 
+
 @layer base {
   body {
     @apply font-inter;
@@ -16,6 +17,12 @@
 }
 
 @layer utilities {
+
+  .animated-hr {
+    @apply bg-gradient-to-r from-primary to-secondary h-1 absolute left-1/2;
+    animation: stretch 1s ease-out forwards;
+  }
+
   .btn {
     @apply py-4 px-4 bg-secondary hover:bg-opacity-70 rounded-[30px] text-white text-lg font-semibold;
   }
@@ -116,7 +123,7 @@
   }
 
   .nav-logo {
-    @apply font-spaceGrotesk text-[21px] text-secondary font-bold;
+    @apply font-jetBrainsMono text-[21px] text-secondary font-bold;
   }
 
   /* PRICE INFO */
