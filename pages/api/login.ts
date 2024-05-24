@@ -1,9 +1,9 @@
-"use client"
-
-
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDB } from "@/lib/actions/mongoose";
 import User from "@/lib/models/user";
+import Product from "@/lib/models/product.model";
+import { scrapeAndStoreProduct } from "@/lib/actions";
+import axios from "axios";
 
 connectToDB();
 

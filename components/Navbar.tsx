@@ -10,11 +10,14 @@ const navIcons = [
     { src: '/assets/icons/search.svg', alt: 'search' },
     { src: '/assets/icons/black-heart.svg', alt: 'heart' },
     { src: '/assets/icons/user.svg', alt: 'user', onclick: 'handleUserClick' }
-
 ]
+
+
+const userLoggedInIcon = { src: '/assets/icons/userLogged.svg', alt: 'loggedIn' }
 
 const Navbar = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleUserClick = () => {
         setShowLoginModal(true);
@@ -24,10 +27,14 @@ const Navbar = () => {
         setShowLoginModal(false);
     };
 
+    const handleLogin = () => {
+        setIsLoggedIn(true);
+    };
 
     return (
         <header className="w-full">
             <nav className="nav items-center justify-between p-4">
+                {/* Logo and brand name */}
                 <Link href="/" className="flex flex-col items-center">
                     <Image
                         src="/assets/icons/logo.svg"
@@ -40,13 +47,14 @@ const Navbar = () => {
                     </p>
                 </Link>
 
+                {/* Navigation icons */}
                 {/* here we loop over the var array defined above to get the icons */}
                 <div className="flex items-center gap-5">
                     {/* using {} to write dynamic code Called dynamic block of code */}
                     {navIcons.map((icon) => (
                         <Image
                             key={icon.alt}
-                            src={icon.src}
+                            src={icon.alt === 'user' && isLoggedIn ? userLoggedInIcon.src : icon.src}
                             alt={icon.alt}
                             width={28}
                             height={28}
@@ -57,7 +65,7 @@ const Navbar = () => {
                 </div>
             </nav>
             <hr className="animated-hr" />
-            {showLoginModal && <LoginModel onClose={handleCloseModal} />}
+            {showLoginModal && <LoginModel onClose={handleCloseModal} onLogin={handleLogin} />}
         </header>
     );
 };

@@ -1,4 +1,6 @@
 import { PriceHistoryItem, Product } from "@/types";
+import { connectToDB } from "./mongoose";
+import User from "../models/user";
 
 const Notification = {
     WELCOME: 'WELCOME',
@@ -126,3 +128,25 @@ export const formatNumber = (num: number = 0) => {
         maximumFractionDigits: 0,
     });
 };
+
+
+// export async function addUserProduct(userId: string, productId: string) {
+//     try {
+//         connectToDB();
+
+//         // Find the user by ID and update its followedProducts array
+//         const user = await User.findById(userId);
+//         if (!user) throw new Error('User not found');
+
+//         // Check if the product is already in the followed products list
+//         if (!user.followedProducts.includes(productId)) {
+//             // Add the product ID to the user's followedProducts array
+//             user.followedProducts.push(productId);
+//             await user.save();
+//         }
+
+//         return user;
+//     } catch (error: any) {
+//         throw new Error(`Failed to add product to user: ${error.message}`);
+//     }
+// }

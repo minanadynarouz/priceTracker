@@ -8,7 +8,6 @@ import { revalidatePath } from "next/cache";
 import { User } from "@/types";
 import { generateEmailBody, sendEmail } from "../nodemailer";
 
-
 // Scrap the product, create it in Database or update it if already existing
 
 export async function scrapeAndStoreProduct(productUrl: string) {
@@ -47,6 +46,7 @@ export async function scrapeAndStoreProduct(productUrl: string) {
         );
 
         revalidatePath(`/products/${newProduct._id}`);
+
     } catch (error: any) {
         throw new Error(`Failed to create/update product: ${error.message}`)
     }

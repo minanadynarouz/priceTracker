@@ -16,21 +16,22 @@ const Home = async () => {
         <div className="flex max-xl:flex-col gap-16">
           <div className="flex flex-col justify-center">
             <p className="text-sky-700 text-sm" style={{ display: 'inline-flex' }}>
-              Smart Shopping starts here:
+              Begin your intelligent shopping journey here:
               <Image
-                src="/assets/icons/arrow-right.svg"
+                src="/assets/icons/down-arrow.svg"
                 alt="arrow-right"
                 width={16}
                 height={16}
+                className="ml-2"
               />
             </p>
             <h1 className="head-text">
-              Unleash the Power of
+              Unlock the Strength of
               <span className="text-sky-700"> PricePal</span>
             </h1>
 
             <p className="mt-6">
-              Robust, self-service product and growth analytics to help you convert, engage, and retain more.
+              Robust, self-service product and analytics to help you track and trace and retain more.
             </p>
 
             <Searchbar />

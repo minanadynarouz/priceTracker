@@ -101,6 +101,10 @@
     @apply p-6 bg-white inline-block w-full max-w-md my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-2xl;
   }
 
+  .dialog-content-success {
+    @apply p-6 bg-white inline-block w-full max-w-md overflow-hidden text-center align-middle transition-all transform shadow-xl rounded-2xl;
+  }
+
   .dialog-head_text {
     @apply text-secondary text-lg leading-[24px] font-semibold mt-4;
   }
